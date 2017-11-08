@@ -1,35 +1,28 @@
-﻿using System.Reactive.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using ReactiveUI;
 
 namespace DiaShowWpf
 {
     /// <summary>
     /// Interaction logic for Window.xaml
     /// </summary>
-    public partial class Window : IViewFor<WindowViewModel>
+    public partial class Window
     {
         public Window()
         {
-            ViewModel = new WindowViewModel();
             InitializeComponent();
-
-            DataContext = ViewModel;
-
-            this.Events()
-                .KeyDown.Where(x => x.Key == Key.Right || x.Key == Key.Left || x.Key == Key.Space)
-                .InvokeCommand(this, x => x.ViewModel.KeyDownCommand);
-            this.Events().Loaded.InvokeCommand(this, x => x.ViewModel.GetImages);
         }
 
-        object IViewFor.ViewModel
+        private void SelectPath(object sender, RoutedEventArgs e)
         {
-            get { return ViewModel; }
-            set { ViewModel = (WindowViewModel) value; }
+            var box = sender as TextBox;
+            box?.SelectAll();
         }
 
-        public WindowViewModel ViewModel { get; set; }
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is WindowViewModel vm)
+                vm.GetResultsFromPath();
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DiaShowWpf
+namespace DiaShowWpf.Util
 {
     public class ListyList<T> : List<T>
     {
@@ -15,8 +15,6 @@ namespace DiaShowWpf
         {
             AddRange(list);
         }
-
-        // TODO: FIX "return this[_index];" & "return this[index];", when list empty
 
         public T Previous()
         {
@@ -76,12 +74,12 @@ namespace DiaShowWpf
         {
             _index = 0;
             var rng = new Random();
-            int n = Count;
+            var n = Count;
             while (n > 1)
             {
                 n--;
-                int k = rng.Next(n + 1);
-                T value = this[k];
+                var k = rng.Next(n + 1);
+                var value = this[k];
                 this[k] = this[n];
                 this[n] = value;
             }

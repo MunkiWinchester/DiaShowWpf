@@ -13,7 +13,7 @@ namespace DiaShowWpf.Util
                 var bi = new BitmapImage();
                 bi.BeginInit();
                 bi.UriSource = new Uri(value.ToString());
-                bi.CacheOption = BitmapCacheOption.None;
+                bi.CacheOption = BitmapCacheOption.OnLoad;
                 bi.EndInit();
                 return bi;
             }
